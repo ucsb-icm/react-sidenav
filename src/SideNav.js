@@ -8,13 +8,12 @@ import assign from 'object-assign';
 const SideNav = React.createClass({
 
     propTypes: {
-        selected: PropTypes.string,
+        selected: PropTypes.arrayOf(PropTypes.string),
         navs: PropTypes.array,
         onSelection: PropTypes.func,
         children: PropTypes.node,
         navtype: PropTypes.string,
-        navrenderer: PropTypes.node,
-        style: PropTypes.object
+        navrenderer: PropTypes.node
     },
 
     buildFromSettings() {
@@ -32,9 +31,13 @@ const SideNav = React.createClass({
 
     },
     onSubNavClick(group,child) {
-        var selection = {group: group, id: child};
-        this.setState({selected: selection});
-        this.dispatchSelection(selection);
+        var new_selection = child;
+        var index = this.props.selected.indexOf(new_selection);
+        if (index != -1)
+            this.setState({selected: this.props.selected.splice(index, 1)});
+        else
+            this.setState({selected: this.props.selected.concat([new_selection])});
+        this.dispatchSelection({id: new_selection});
     },
     onClick(id) {
         this.dispatchSelection({id: id});
@@ -59,7 +62,7 @@ const SideNav = React.createClass({
 
     render() {
 
-        return <div style={assign({position: 'relative', width: '100%', color: '#FFF'}, this.props.style)}>
+        return <div style={{position: 'relative', width: '100%', color: '#FFF'}}>
                 {this.buildChildren()}
         </div>;
     }

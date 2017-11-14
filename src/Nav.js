@@ -16,7 +16,7 @@ export const ITEM_MAP = {
 
 
 export const isActive = (props) => {
-    return   ( props.selected && props.selected === props.id  );
+    return   ( props.selected && props.selected.includes(props.id)  );
 };
 const Nav = React.createClass({
 
@@ -24,7 +24,7 @@ const Nav = React.createClass({
         onClick: PropTypes.func,
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
-        selected: PropTypes.string,
+        selected: PropTypes.arrayOf(PropTypes.string),
         type: PropTypes.string,
         navrenderer: PropTypes.node
     },
