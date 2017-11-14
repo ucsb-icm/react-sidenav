@@ -8,7 +8,7 @@ import assign from 'object-assign';
 const SideNav = React.createClass({
 
     propTypes: {
-        selected: PropTypes.arrayOf(PropTypes.string),
+        selected: PropTypes.array,
         navs: PropTypes.array,
         onSelection: PropTypes.func,
         children: PropTypes.node,

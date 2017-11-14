@@ -24,7 +24,7 @@ const Nav = React.createClass({
         onClick: PropTypes.func,
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
-        selected: PropTypes.arrayOf(PropTypes.string),
+        selected: PropTypes.array,
         type: PropTypes.string,
         navrenderer: PropTypes.node
     },

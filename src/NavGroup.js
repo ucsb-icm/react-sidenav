@@ -12,7 +12,7 @@ const NavGroup = React.createClass({
 
     propTypes: {
         onClick: PropTypes.func,
-        selected: PropTypes.arrayOf(PropTypes.string),
+        selected: PropTypes.array,
         nav: PropTypes.object,
         children: PropTypes.node,
         id: PropTypes.string,
