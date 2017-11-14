@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -87,9 +87,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -123,13 +123,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    propTypes: {
-	        selected: _react.PropTypes.string,
+	        selected: _react.PropTypes.array,
 	        navs: _react.PropTypes.array,
 	        onSelection: _react.PropTypes.func,
 	        children: _react.PropTypes.node,
 	        navtype: _react.PropTypes.string,
-	        navrenderer: _react.PropTypes.node,
-	        style: _react.PropTypes.object
+	        navrenderer: _react.PropTypes.node
 	    },
 	
 	    buildFromSettings: function buildFromSettings() {
@@ -147,9 +146,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    },
 	    onSubNavClick: function onSubNavClick(group, child) {
-	        var selection = { group: group, id: child };
-	        this.setState({ selected: selection });
-	        this.dispatchSelection(selection);
+	        var new_selection = child;
+	        var index = this.props.selected.indexOf(new_selection);
+	        if (index != -1) this.setState({ selected: this.props.selected.splice(index, 1) });else this.setState({ selected: this.props.selected.concat([new_selection]) });
+	        this.dispatchSelection({ id: new_selection });
 	    },
 	    onClick: function onClick(id) {
 	        this.dispatchSelection({ id: id });
@@ -177,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        return _react2.default.createElement(
 	            'div',
-	            { style: (0, _objectAssign2.default)({ position: 'relative', width: '100%', color: '#FFF' }, this.props.style) },
+	            { style: { position: 'relative', width: '100%', color: '#FFF' } },
 	            this.buildChildren()
 	        );
 	    }
@@ -185,15 +185,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.SideNav = SideNav;
 	exports.default = SideNav;
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -230,7 +230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    propTypes: {
 	        onClick: _react.PropTypes.func,
-	        selected: _react.PropTypes.any,
+	        selected: _react.PropTypes.array,
 	        nav: _react.PropTypes.object,
 	        children: _react.PropTypes.node,
 	        id: _react.PropTypes.string,
@@ -304,9 +304,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.NavGroup = NavGroup;
 	exports.default = NavGroup;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -339,7 +339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var isActive = exports.isActive = function isActive(props) {
-	    return props.selected && props.selected === props.id;
+	    return props.selected && props.selected.includes(props.id);
 	};
 	var Nav = _react2.default.createClass({
 	    displayName: 'Nav',
@@ -349,7 +349,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onClick: _react.PropTypes.func,
 	        id: _react.PropTypes.string.isRequired,
 	        text: _react.PropTypes.string.isRequired,
-	        selected: _react.PropTypes.string,
+	        selected: _react.PropTypes.array,
 	        type: _react.PropTypes.string,
 	        navrenderer: _react.PropTypes.node
 	    },
@@ -379,9 +379,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.default = Nav;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	  Copyright (c) 2015 Jed Watson.
@@ -428,9 +428,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
@@ -444,8 +444,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js?localIdentName=[name]_[local]_[hash:base64:5]!./../node_modules/postcss-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js?localIdentName=[name]_[local]_[hash:base64:5]!./../node_modules/postcss-loader/index.js!./style.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js?localIdentName=[name]_[local]_[hash:base64:5]!../node_modules/postcss-loader/index.js!./style.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?localIdentName=[name]_[local]_[hash:base64:5]!../node_modules/postcss-loader/index.js!./style.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -454,30 +454,30 @@ return /******/ (function(modules) { // webpackBootstrap
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(8)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".style_rui-snav-grp_OgHHH {\n  cursor: pointer;\n  border-left: 4px solid transparent;\n  padding: 12px 10px;\n  font-weight: bold;\n}\n.style_sidenav-item_1ECTt {\n  cursor: pointer;\n  border-left: 4px solid transparent;\n  font-weight: bold;\n  padding: 12px 10px;\n}\n.style_active_1bLoa {\n  background: #1abc9c;\n  border-left: 4px solid #117964;\n}\n\n.style_sidenav-item_1ECTt:hover {\n  background: #1abc9c !important;\n}\n\n.style_rui-snav-grp_OgHHH:hover {\n  background: #2c3e50;\n}\n.style_rui-snav-items_2hyGY {\n  overflow: hidden;\n  transition: height 0.15s ease-out;\n}\n.style_rui-snav-grp-c_3AfFK > .style_sidenav-item_1ECTt {\n  padding-left: 32px;\n}\n\n.style_rui-snav-collapsed_3O2xO {\n    border-left: 4px solid #117964;\n}\n", ""]);
+	exports.push([module.id, ".style_rui-snav-grp__rPwE {\r\n  cursor: pointer;\r\n  border-left: 4px solid transparent;\r\n  padding: 12px 10px;\r\n  font-weight: bold;\r\n}\r\n.style_sidenav-item_2NhF- {\r\n  cursor: pointer;\r\n  border-left: 4px solid transparent;\r\n  font-weight: bold;\r\n  padding: 12px 10px;\r\n}\r\n.style_active_12JmP {\r\n  background: #1abc9c;\r\n  border-left: 4px solid #117964;\r\n}\r\n\r\n.style_sidenav-item_2NhF-:hover {\r\n  background: #1abc9c !important;\r\n}\r\n\r\n.style_rui-snav-grp__rPwE:hover {\r\n  background: #2c3e50;\r\n}\r\n.style_rui-snav-items_N21Ej {\r\n  overflow: hidden;\r\n  transition: height 0.15s ease-out;\r\n}\r\n.style_rui-snav-grp-c_7tICW > .style_sidenav-item_2NhF- {\r\n  padding-left: 32px;\r\n}\r\n\r\n.style_rui-snav-collapsed_3-wgk {\r\n    border-left: 4px solid #117964;\r\n}\r\n", ""]);
 	
 	// exports
 	exports.locals = {
-		"rui-snav-grp": "style_rui-snav-grp_OgHHH",
-		"sidenav-item": "style_sidenav-item_1ECTt",
-		"active": "style_active_1bLoa",
-		"rui-snav-items": "style_rui-snav-items_2hyGY",
-		"rui-snav-grp-c": "style_rui-snav-grp-c_3AfFK",
-		"rui-snav-collapsed": "style_rui-snav-collapsed_3O2xO"
+		"rui-snav-grp": "style_rui-snav-grp__rPwE",
+		"sidenav-item": "style_sidenav-item_2NhF-",
+		"active": "style_active_12JmP",
+		"rui-snav-items": "style_rui-snav-items_N21Ej",
+		"rui-snav-grp-c": "style_rui-snav-grp-c_7tICW",
+		"rui-snav-collapsed": "style_rui-snav-collapsed_3-wgk"
 	};
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -531,9 +531,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -548,7 +548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -783,9 +783,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -801,9 +801,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var IconLeft = exports.IconLeft = function IconLeft(props) {
-	    var icon = props.icon;
-	    var text = props.text;
-	    var id = props.id;
+	    var icon = props.icon,
+	        text = props.text,
+	        id = props.id;
 	
 	
 	    return _react2.default.createElement(
@@ -820,9 +820,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var IconRight = exports.IconRight = function IconRight(props) {
-	    var icon = props.icon;
-	    var text = props.text;
-	    var id = props.id;
+	    var icon = props.icon,
+	        text = props.text,
+	        id = props.id;
 	
 	
 	    return _react2.default.createElement(
@@ -851,12 +851,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	IconLeft.propTypes = propTypes;
 	IconRight.propTypes = propTypes;
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
+	/*
+	object-assign
+	(c) Sindre Sorhus
+	@license MIT
+	*/
+	
 	'use strict';
 	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 	
@@ -877,7 +884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			// Detect buggy property enumeration order in older V8 versions.
 	
 			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
 			test1[5] = 'de';
 			if (Object.getOwnPropertyNames(test1)[0] === '5') {
 				return false;
@@ -906,7 +913,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 	
 			return true;
-		} catch (e) {
+		} catch (err) {
 			// We don't expect any of the above to throw, but better to be safe.
 			return false;
 		}
@@ -926,8 +933,8 @@ return /******/ (function(modules) { // webpackBootstrap
 				}
 			}
 	
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
 				for (var i = 0; i < symbols.length; i++) {
 					if (propIsEnumerable.call(from, symbols[i])) {
 						to[symbols[i]] = from[symbols[i]];
@@ -940,7 +947,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
