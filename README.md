@@ -1,4 +1,4 @@
-react-sidenav
+UCSB ICM fork of react-sidenav v1.0.4
 ==============================
 
 >
